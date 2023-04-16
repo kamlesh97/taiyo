@@ -1,24 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from "react-router-dom";
+import "./App.css";
+import UserList from "./Screen/UserList";
+import Adduser from "./Screen/Adduser";
+import Edituser from "./Screen/Edituser";
+import Countrymap from "./Screen/Countrymap";
+import CovidChart from "./Screen/CovidChart";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container mx-auto px-2 max-w-5xl pt-10 p-4 sm:ml-64 md:pt-32 ">
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<UserList />} />
+        <Route path="/add" element={<Adduser />} />
+        <Route path="/edit/:id" element={<Edituser />} />
+        <Route path="/country" element={<Countrymap />} />
+        <Route path="/chart" element={<CovidChart />} />
+      </Routes>
     </div>
   );
 }
