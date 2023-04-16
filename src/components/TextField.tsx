@@ -13,6 +13,7 @@ const TextField = ({ label, inputProps, value, onChange }:textfield) => {
         {...inputProps}
         value={value}
         onChange={onChange}
+        required
       />
     </div>
   );

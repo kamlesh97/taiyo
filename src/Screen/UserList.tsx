@@ -31,7 +31,7 @@ const UserList = () => {
     ));
   return (
     <div>
-      <h1>Contact</h1>
+      <h2 className="pb-10 text-xl text-gray-700">Contact</h2>
       <Button onClick={() => navigate("/add")}>Create Contact</Button>
 
       <div className="grid gap-5 md:grid-cols-2">

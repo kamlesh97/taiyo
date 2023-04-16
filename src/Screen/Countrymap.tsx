@@ -1,24 +1,18 @@
-import { useState } from "react";
-import {
-  MapContainer,
-  TileLayer,
-  Popup,
-  Polyline,
-  Marker,
-} from "react-leaflet";
+import { MapContainer, TileLayer, Popup, Marker } from "react-leaflet";
 import { useQuery } from "react-query";
 import "../App.css";
+
 const Countrymap = () => {
   const getFacts = async () => {
     const res = await fetch("https://disease.sh/v3/covid-19/countries");
     return res.json();
   };
 
-  const { data, error, isLoading } = useQuery("randomFacts", getFacts);
+  const { data, isLoading } = useQuery("randomFacts", getFacts);
 
   const renderMarkers = () => {
     let latLong: Array<Array<any>> = [];
-    data &&
+    Array.isArray(data) &&
       data.map((val: any) => {
         let dt1 = [];
         dt1.push(val?.countryInfo?.lat, val?.countryInfo?.long);
@@ -27,8 +21,9 @@ const Countrymap = () => {
     return latLong;
   };
 
-  return (
-    // <div>
+  return isLoading ? (
+    <div>loading</div>
+  ) : (
     <MapContainer
       center={[38, 30]}
       zoom={3}
@@ -41,14 +36,12 @@ const Countrymap = () => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {data &&
-        renderMarkers().map((pos: any) => (
-          <Marker position={pos}>
+        renderMarkers().map((pos: any, index: number) => (
+          <Marker position={pos} key={index}>
             <Popup>pop</Popup>
           </Marker>
         ))}
     </MapContainer>
-
-    // </div>
   );
 };
 
